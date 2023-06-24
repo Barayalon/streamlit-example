@@ -207,7 +207,7 @@ def main():
 
 
 
-    user_question = st.text_input("are you ready to start?")
+    
 
     if st.button("Next question"):
        question_num = st.session_state.question_num
@@ -234,18 +234,22 @@ def main():
         if st.session_state.article:
            st.session_state.question = st.radio("Exam questions", st.session_state.new_exam, index = 1)
            st.text_area("Question number", value = int(st.session_state.question_num))
+           
+    if st.session_state.question:
+      question_num = st.session_state.question_num
+      question = st.session_state.question
+      question = str(question)
+      question = question.replace("\n","<br/>")
+      st.write(bot_template.replace(
+                  "{{MSG}}", question), unsafe_allow_html=True)
+
+    user_question = st.text_input("are you ready to start?")
+
     if st.session_state.question:
           if user_question:
             question_num = st.session_state.question_num
             handle_answer(user_question,st.session_state.question)
 
-          else:
-            question_num = st.session_state.question_num
-            question = st.session_state.question
-            question = str(question)
-            question = question.replace("\n","<br/>")
-            st.write(bot_template.replace(
-                    "{{MSG}}", question), unsafe_allow_html=True)
 
               
 
