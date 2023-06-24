@@ -41,10 +41,10 @@ def handle_answer(answer,question):
       for i, message in enumerate(history):
           message = message.replace("\n","<br/>")
           if i % 2 == 0:
-              st.write(user_template.replace(
+              st.write(bot_template.replace(
                   "{{MSG}}", message), unsafe_allow_html=True)
           else:
-              st.write(bot_template.replace(
+              st.write(user_template.replace(
                   "{{MSG}}", message), unsafe_allow_html=True)
     else:
        st.write(bot_template.replace(
@@ -198,11 +198,9 @@ def main():
     if "article" not in st.session_state:
         st.session_state.article = None
     st.header("Answer the questions on your data :books:")
-    
+
     if st.session_state.new_exam:
-      
-      
-      
+
       user_question = st.text_input("are you ready to start?")
       if user_question:
         handle_answer(user_question,st.session_state.new_exam[1])
