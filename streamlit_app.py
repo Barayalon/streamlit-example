@@ -186,6 +186,7 @@ def check_answers(question, answer, sources):
 
 
 def main():
+    st.session_state.question_num = 0
     if not(os.environ['OPENAI_API_KEY']):
       st.write('## 1. Enter your OpenAI API key')
       st.text_input('OpenAI API key', type='password', key='api_key', on_change=on_api_key_change, label_visibility="collapsed")
@@ -199,7 +200,7 @@ def main():
         st.session_state.article = None
     st.header("Answer the questions on your data :books:")
 
-    if st.session_state.new_exam:
+    if st.session_state.question_num > 0:
 
       user_question = st.text_input("are you ready to start?")
       if st.button("Next Question"):
