@@ -2,8 +2,6 @@ __version__ = "0.0.0.1"
 app_name = "Build my exam"
 
 import streamlit as st
-
-
 from dotenv import load_dotenv
 import os
 
@@ -12,7 +10,9 @@ ss = st.session_state
 
 
 #User's API key to OpenAI
-
+def on_api_key_change():
+	api_key = ss.get('api_key') or os.getenv('OPENAI_API_KEY')
+	os.environ['OPENAI_API_KEY'] = api_key
 
 
 
