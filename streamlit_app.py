@@ -251,7 +251,7 @@ def main():
 
     if st.session_state.article:
        expander = st.expander("Article text")
-       expander.write(st.markdown(st.session_state.article))
+       expander.write(st.session_state.article)
 
 
               
