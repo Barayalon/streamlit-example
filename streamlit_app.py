@@ -200,23 +200,23 @@ def main():
         st.session_state.article = None
     st.header("Answer the questions on your data :books:")
 
-    if int(st.session_state.question_num) > 0:
 
-      user_question = st.text_input("are you ready to start?")
 
-      if st.button("Next Question"+str(st.session_state.question_num) ):
-        question_num = st.session_state.question_num
-        next_question = 1 + question_num
-        st.session_state.question_num = next_question 
+    user_question = st.text_input("are you ready to start?")
 
-      if user_question:
-        question_num = st.session_state.question_num
-        handle_answer(user_question,st.session_state.new_exam[question_num])
-      else:
-        question = st.session_state.new_exam[question_num]
-        question = question.replace("\n","<br/>")
-        st.write(bot_template.replace(
-                "{{MSG}}", question), unsafe_allow_html=True)
+    if st.button("Next Question"+str(st.session_state.question_num) ):
+      question_num = st.session_state.question_num
+      next_question = 1 + question_num
+      st.session_state.question_num = next_question 
+
+    if user_question:
+      question_num = st.session_state.question_num
+      handle_answer(user_question,st.session_state.new_exam[question_num])
+    else:
+      question = st.session_state.new_exam[question_num]
+      question = question.replace("\n","<br/>")
+      st.write(bot_template.replace(
+              "{{MSG}}", question), unsafe_allow_html=True)
 
     with st.sidebar:
         st.subheader("Your documents")
@@ -233,7 +233,7 @@ def main():
                   # define the article as part of the environment 
                   st.session_state.article = raw_text
                   # define the question number
-                  st.session_state.question_num = 1
+                  st.session_state.question_num = int(1)
         if st.session_state.article:
            st.text_area("Exam questions", value =st.session_state.new_exam)
            st.text_area("Question number", value = int(st.session_state.question_num))
