@@ -203,11 +203,11 @@ def main():
 
       user_question = st.text_input("are you ready to start?")
       if st.button("Next Question"):
-         question_num = st.st.session_state.question_num
+         question_num = st.session_state.question_num
          next_question = 1+ question_num
-         st.st.session_state.question_num = 1+ question_num
+         st.session_state.question_num = 1+ question_num
       if user_question:
-        question_num = st.st.session_state.question_num
+        question_num = st.session_state.question_num
         handle_answer(user_question,st.session_state.new_exam[question_num])
       else:
         question = st.session_state.new_exam[1]
