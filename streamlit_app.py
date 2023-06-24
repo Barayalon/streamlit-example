@@ -247,6 +247,11 @@ def main():
           question = question.replace("\n","<br/>")
           st.write(bot_template.replace(
                       "{{MSG}}", question), unsafe_allow_html=True)
+          
+
+    if st.session_state.article:
+       expender = st.expender("Article text")
+       expender.write(st.session_state.article)
 
 
               
