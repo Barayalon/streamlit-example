@@ -37,13 +37,18 @@ def handle_answer(answer,question):
     response = check_answers(question,answer,sources)
     st.session_state.chat_history = history.extend([answer,response])
 
-    for i, message in enumerate(st.session_state.chat_history):
-        if i % 2 == 0:
-            st.write(user_template.replace(
-                "{{MSG}}", message), unsafe_allow_html=True)
-        else:
-            st.write(bot_template.replace(
-                "{{MSG}}", message), unsafe_allow_html=True)
+    if st.session_state.chat_history:
+
+      for i, message in enumerate(st.session_state.chat_history):
+          if i % 2 == 0:
+              st.write(user_template.replace(
+                  "{{MSG}}", message), unsafe_allow_html=True)
+          else:
+              st.write(bot_template.replace(
+                  "{{MSG}}", message), unsafe_allow_html=True)
+    else:
+       st.write(bot_template.replace(
+                  "{{MSG}}", question), unsafe_allow_html=True)
 
 def convert_list_to_text(lst):
     text = ' '.join(lst)
@@ -190,6 +195,7 @@ def main():
         st.session_state.new_exam = None
     if "article" not in st.session_state:
         st.session_state.article = None
+  
     if st.session_state.new_exam:
       st.header("Answer the questions on your data :books:")
       st.write(bot_template.replace(
