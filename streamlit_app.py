@@ -229,7 +229,7 @@ def main():
 
     
     if st.session_state.question.find('\n') > 0:
-      user_question = st.radio("choose your answer", st.session_state.question)
+      user_question = st.radio("choose your answer", st.session_state.question.strip().split('\n'))
     else:
       user_question = st.text_input("Write the answer to the question")
 
