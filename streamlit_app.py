@@ -201,7 +201,9 @@ def main():
     if "question_num" not in st.session_state:
        st.session_state.question_num = int(0)
     if "question" not in st.session_state:
-      st.session_state.question = ModuleNotFoundError
+      st.session_state.question = None
+    if "history" not in st.session_state:
+      st.session_state.history = None
 
     st.header("Answer the questions on your data :books:")
 
