@@ -2,7 +2,7 @@ __version__ = "0.0.0.1"
 app_name = "Build my exam"
 
 import streamlit as st
-
+from dotenv import load_dotenv
 import os
 
 st.set_page_config(layout='centered', page_title=f'{app_name} {__version__}')
@@ -10,9 +10,7 @@ ss = st.session_state
 
 
 #User's API key to OpenAI
-def on_api_key_change():
-	api_key = ss.get('api_key') or os.getenv('OPENAI_KEY')
-	os.environ['OPENAI_API_KEY'] = api_key
+
 
 
 
@@ -21,9 +19,7 @@ def on_api_key_change():
 
 
 def main():
-    st.write('## 1. Enter your OpenAI API key')
-    st.text_input('OpenAI API key', type='password', key='api_key', on_change=on_api_key_change, label_visibility="collapsed")
-    openai_key = os.getenv['OPENAI_API_KEY']
+    load_dotenv()
     
     st.header("Chat with multiple PDFs :books:")
     user_question = st.text_input("Ask a question about your documents:")
