@@ -39,7 +39,7 @@ def handle_answer(answer,question):
 
     if st.session_state.chat_history:
 
-      for i, message in enumerate(st.session_state.chat_history):
+      for i, message in enumerate(history):
           if i % 2 == 0:
               st.write(user_template.replace(
                   "{{MSG}}", message), unsafe_allow_html=True)
