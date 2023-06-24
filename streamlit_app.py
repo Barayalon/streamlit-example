@@ -38,7 +38,6 @@ def handle_answer(answer,question):
     st.session_state.chat_history = history.extend([answer,response])
 
     if history:
-
       for i, message in enumerate(history):
           if i % 2 == 0:
               st.write(user_template.replace(
