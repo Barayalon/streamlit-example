@@ -186,7 +186,7 @@ def check_answers(question, answer, sources):
 
 
 def main():
-    question_num = 0
+    st.session_state.question_num = 0
     if not(os.environ['OPENAI_API_KEY']):
       st.write('## 1. Enter your OpenAI API key')
       st.text_input('OpenAI API key', type='password', key='api_key', on_change=on_api_key_change, label_visibility="collapsed")
@@ -198,17 +198,24 @@ def main():
         st.session_state.new_exam = None
     if "article" not in st.session_state:
         st.session_state.article = None
+    if "question_num" not in st.session_state:
+       st.session_state.question_num = int(0)
+
     st.header("Answer the questions on your data :books:")
 
 
 
     user_question = st.text_input("are you ready to start?")
     if st.button("Next question"):
-       question_num = question_num + 1
+       question_num = st.session_state.question_num
+       next_questin = question_num + 1
+       st.session_state.question_num = next_question
 
     if user_question:
+      question_num = st.session_state.question_num
       handle_answer(user_question,st.session_state.new_exam[question_num])
     else:
+      question_num = st.session_state.question_num
       question = question.replace("\n","<br/>")
       st.write(bot_template.replace(
               "{{MSG}}", question), unsafe_allow_html=True)
