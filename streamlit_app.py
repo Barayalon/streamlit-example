@@ -228,23 +228,25 @@ def main():
            st.text_area("Question nu st.session_state.questionmber", value =  st.session_state.question)
 
     
-    if st.session_state.question.find('Multiple') > -1:
-      user_question = st.radio("choose your answer", st.session_state.question.strip().split('\n'))
-    else:
-      user_question = st.text_input("Write the answer to the question")
+    #if st.session_state.question.find('Multiple') > -1:
+      #user_question = st.radio("choose your answer", st.session_state.question.strip().split('\n'))
+    #else:
+      #user_question = st.text_input("Write the answer to the question")
+    
+    user_question = st.text_input("Write the answer to the question")
 
     if st.session_state.question:
-          if user_question:
-            question_num = st.session_state.question_num
-            handle_answer(user_question,st.session_state.question)
+        if user_question:
+          question_num = st.session_state.question_num
+          handle_answer(user_question,st.session_state.question)
 
-          else:
-            question_num = st.session_state.question_num
-            question = st.session_state.question
-            question = str(question)
-            question = question.replace("\n","<br/>")
-            st.write(bot_template.replace(
-                        "{{MSG}}", question), unsafe_allow_html=True)
+        else:
+          #question_num = st.session_state.question_num
+          question = st.session_state.question
+          uestion = str(question)
+          question = question.replace("\n","<br/>")
+          st.write(bot_template.replace(
+                      "{{MSG}}", question), unsafe_allow_html=True)
 
 
               
