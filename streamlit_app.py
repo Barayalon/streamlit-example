@@ -211,6 +211,7 @@ def main():
        question_num = st.session_state.question_num
        next_question = int(question_num) + int(1)
        st.session_state.question_num = int(next_question)
+
     if st.session_state.article:
       if user_question:
         question_num = st.session_state.question_num
@@ -240,7 +241,7 @@ def main():
                   # define the question number
                   st.session_state.question_num = int(1)
         if st.session_state.article:
-           st.text_area("Exam questions", value =st.session_state.new_exam)
+           st.radio("Exam questions", value =st.session_state.new_exam)
            st.text_area("Question number", value = int(st.session_state.question_num))
           
 
