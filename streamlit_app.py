@@ -206,16 +206,6 @@ def main():
       st.session_state.chat_history = None
 
     st.header("Answer the questions on your data :books:")
-
-
-
-    
-
-    if st.button("Next question"):
-       question_num = st.session_state.question_num
-       next_question = int(question_num) + int(1)
-       st.session_state.question_num = int(next_question)
-
    
     with st.sidebar:
         st.subheader("Your documents")
@@ -238,7 +228,10 @@ def main():
            st.text_area("Question number", value = int(st.session_state.question_num))
 
     
-    user_question = st.text_input("are you ready to start?")
+    if st.session_state.question.find('\n') > 0:
+      user_question = st.radio("choose your answer", st.session_state.question)
+    else:
+      user_question = st.text_input("Write the answer to the question")
 
     if st.session_state.question:
           if user_question:
