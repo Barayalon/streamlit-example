@@ -43,55 +43,6 @@ def handle_answer(answer,question):
             st.write(bot_template.replace(
                 "{{MSG}}", message.content), unsafe_allow_html=True)
 
-
-
-
-def main():
-    st.write('## 1. Enter your OpenAI API key')
-    st.text_input('OpenAI API key', type='password', key='api_key', on_change=on_api_key_change, label_visibility="collapsed")
-    st.write(os.environ['OPENAI_API_KEY'])
-    
-    if "conversation" not in st.session_state:
-        st.session_state.conversation = None
-    if "new_exam" not in st.session_state:
-        st.session_state.new_exam = None
-    if "article" not in st.session_state:
-        st.session_state.article = None
-    if st.session_state.new_exam:
-      st.header("Answer the questions on your data :books:")
-      user_question = st.text_input(st.session_state.new_exam[1])
-      if user_question:
-        handle_answer(user_question,st.session_state.new_exam[1])
-
-    with st.sidebar:
-        st.subheader("Your documents")
-        pdf_docs = st.file_uploader(
-            "Upload your PDFs here and click on 'Process'", accept_multiple_files=True)
-        if st.button("Generate Exam"):
-             with st.spinner("Processing"):
-                  # get pdf text
-                  raw_text = get_pdf_text(pdf_docs)
-                  # new exam
-                  new_exam = answer_query_gpt_16k_bagrut(prompt.example_questions,raw_text)
-                  # list questions
-                  st.session_state.new_exam = new_exam.strip().split('\n\n')
-                  # define the article as part of the environment 
-                  st.session_state.article = raw_text
-
-
-
-
-if __name__ == '__main__':
-    main()
-
-
-
-
-import openai
-import tiktoken
-
-
-
 def convert_list_to_text(lst):
     text = ' '.join(lst)
     return text
@@ -224,3 +175,42 @@ def check_answers(question, answer, sources):
 
     # Return the content of the first message in the response choices
     return response['choices'][0]['message']['content']
+
+
+def main():
+    st.write('## 1. Enter your OpenAI API key')
+    st.text_input('OpenAI API key', type='password', key='api_key', on_change=on_api_key_change, label_visibility="collapsed")
+    st.write(os.environ['OPENAI_API_KEY'])
+    
+    if "conversation" not in st.session_state:
+        st.session_state.conversation = None
+    if "new_exam" not in st.session_state:
+        st.session_state.new_exam = None
+    if "article" not in st.session_state:
+        st.session_state.article = None
+    if st.session_state.new_exam:
+      st.header("Answer the questions on your data :books:")
+      user_question = st.text_input(st.session_state.new_exam[1])
+      if user_question:
+        handle_answer(user_question,st.session_state.new_exam[1])
+
+    with st.sidebar:
+        st.subheader("Your documents")
+        pdf_docs = st.file_uploader(
+            "Upload your PDFs here and click on 'Process'", accept_multiple_files=True)
+        if st.button("Generate Exam"):
+             with st.spinner("Processing"):
+                  # get pdf text
+                  raw_text = get_pdf_text(pdf_docs)
+                  # new exam
+                  new_exam = answer_query_gpt_16k_bagrut(prompt.example_questions,raw_text)
+                  # list questions
+                  st.session_state.new_exam = new_exam.strip().split('\n\n')
+                  # define the article as part of the environment 
+                  st.session_state.article = raw_text
+
+
+
+
+if __name__ == '__main__':
+    main()
