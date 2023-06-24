@@ -200,6 +200,8 @@ def main():
         st.session_state.article = None
     if "question_num" not in st.session_state:
        st.session_state.question_num = int(0)
+    if "question" not in st.session_state:
+      st.session_state.question = ModuleNotFoundError
 
     st.header("Answer the questions on your data :books:")
 
@@ -215,11 +217,11 @@ def main():
     if st.session_state.article:
       if user_question:
         question_num = st.session_state.question_num
-        handle_answer(user_question,st.session_state.new_exam[question_num])
+        handle_answer(user_question,st.session_state.question)
 
     else:
       question_num = st.session_state.question_num
-      question = st.session_state.new_exam[question_num]
+      question = st.session_state.question
       question = question.replace("\n","<br/>")
       st.write(bot_template.replace(
               "{{MSG}}", question), unsafe_allow_html=True)
@@ -241,7 +243,7 @@ def main():
                   # define the question number
                   st.session_state.question_num = int(1)
         if st.session_state.article:
-           st.radio("Exam questions", st.session_state.new_exam)
+           st.session_state.question = st.radio("Exam questions", st.session_state.new_exam[1:])
            st.text_area("Question number", value = int(st.session_state.question_num))
           
 
