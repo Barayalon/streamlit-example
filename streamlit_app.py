@@ -250,8 +250,8 @@ def main():
           
 
     if st.session_state.article:
-       expender = st.expender("Article text")
-       expender.write(st.session_state.article)
+       expander = st.expander("Article text")
+       expander.write(st.session_state.article)
 
 
               
