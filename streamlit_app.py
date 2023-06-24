@@ -222,6 +222,7 @@ def main():
       else:
         question_num = st.session_state.question_num
         question = st.session_state.question
+        question = str(question)
         question = question.replace("\n","<br/>")
         st.write(bot_template.replace(
                 "{{MSG}}", question), unsafe_allow_html=True)
