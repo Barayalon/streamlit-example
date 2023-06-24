@@ -43,10 +43,6 @@ def handle_answer(answer,question):
           if i % 2 == 0:
               st.write(bot_template.replace(
                   "{{MSG}}", message), unsafe_allow_html=True)
-              if st.button("Next question"+str(st.session_state.question_num), key = i):
-                question_num = int(st.session_state.question_num)
-                next_question = question_num +1
-                st.session_state.question_num = next_question
           else:
               st.write(user_template.replace(
                   "{{MSG}}", message), unsafe_allow_html=True)
@@ -190,7 +186,7 @@ def check_answers(question, answer, sources):
 
 
 def main():
-    st.session_state.question_num = 0
+    question_num = 0
     if not(os.environ['OPENAI_API_KEY']):
       st.write('## 1. Enter your OpenAI API key')
       st.text_input('OpenAI API key', type='password', key='api_key', on_change=on_api_key_change, label_visibility="collapsed")
@@ -207,14 +203,12 @@ def main():
 
 
     user_question = st.text_input("are you ready to start?")
-    question_num = st.session_state.question_num
-    
+    if st.button("Next question"):
+       question_num = question_num + 1
 
     if user_question:
-      question_num = st.session_state.question_num
       handle_answer(user_question,st.session_state.new_exam[question_num])
     else:
-      question = st.session_state.new_exam[question_num]
       question = question.replace("\n","<br/>")
       st.write(bot_template.replace(
               "{{MSG}}", question), unsafe_allow_html=True)
