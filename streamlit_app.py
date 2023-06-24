@@ -202,8 +202,8 @@ def main():
        st.session_state.question_num = int(0)
     if "question" not in st.session_state:
       st.session_state.question = None
-    if "history" not in st.session_state:
-      st.session_state.history = None
+    if "chat_history" not in st.session_state:
+      st.session_state.chat_history = None
 
     st.header("Answer the questions on your data :books:")
 
