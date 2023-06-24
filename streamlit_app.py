@@ -209,18 +209,19 @@ def main():
 
     if st.button("Next question"):
        question_num = st.session_state.question_num
-       next_question = question_num + 1
+       next_question = int(question_num) + int(1)
        st.session_state.question_num = int(next_question)
     if st.session_state.article:
       if user_question:
         question_num = st.session_state.question_num
         handle_answer(user_question,st.session_state.new_exam[question_num])
-      else:
-        question_num = st.session_state.question_num
-        question = st.session_state.new_exam[question_num]
-        question = question.replace("\n","<br/>")
-        st.write(bot_template.replace(
-                "{{MSG}}", question), unsafe_allow_html=True)
+
+    else:
+      question_num = st.session_state.question_num
+      question = st.session_state.new_exam[question_num]
+      question = question.replace("\n","<br/>")
+      st.write(bot_template.replace(
+              "{{MSG}}", question), unsafe_allow_html=True)
 
     with st.sidebar:
         st.subheader("Your documents")
