@@ -202,8 +202,13 @@ def main():
     if st.session_state.new_exam:
 
       user_question = st.text_input("are you ready to start?")
+      if st.button("Next Question"):
+         question_num = st.st.session_state.question_num
+         next_question = 1+ question_num
+         st.st.session_state.question_num = 1+ question_num
       if user_question:
-        handle_answer(user_question,st.session_state.new_exam[1])
+        question_num = st.st.session_state.question_num
+        handle_answer(user_question,st.session_state.new_exam[question_num])
       else:
         question = st.session_state.new_exam[1]
         question = question.replace("\n","<br/>")
@@ -224,6 +229,8 @@ def main():
                   st.session_state.new_exam = new_exam.strip().split('\n\n')
                   # define the article as part of the environment 
                   st.session_state.article = raw_text
+                  # define the question number
+                  st.session_state.question_num = 1
         if st.session_state.article:
            st.text_area("Exam questions", value =st.session_state.new_exam)
 
