@@ -204,7 +204,7 @@ def main():
 
       user_question = st.text_input("are you ready to start?")
 
-      if st.button("Next Question"):
+      if st.button("Next Question"+str(st.session_state.question_num) ):
         question_num = st.session_state.question_num
         next_question = 1+ question_num
         st.session_state.question_num = 1+ question_num
