@@ -237,7 +237,7 @@ def main():
         if st.session_state.article:
            st.text_area("Exam questions", value =st.session_state.new_exam)
            st.text_area("Question number", value = int(st.session_state.question_num))
-           st.text_area("Question number", value = next_question)
+           st.text_area("Question number",ket = 'text_2' , value = next_question)
 
 
 
