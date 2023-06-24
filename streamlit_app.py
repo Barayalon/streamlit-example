@@ -18,6 +18,7 @@ ss = st.session_state
 def on_api_key_change():
 	api_key = ss.get('api_key') or os.getenv('OPENAI_API_KEY')
 	os.environ['OPENAI_API_KEY'] = api_key
+    
 
 def get_pdf_text(pdf_docs):
     text = ""
@@ -65,7 +66,7 @@ if __name__ == '__main__':
 import openai
 import tiktoken
 
-openai.api_key = os.environ['OPENAI_API_KEY']
+
 
 def convert_list_to_text(lst):
     text = ' '.join(lst)
@@ -137,7 +138,7 @@ def data_to_string(data):
 
 def answer_query_gpt_16k_bagrut(exam,sources):
   model = "gpt-3.5-turbo-16k"
-  
+  openai.api_key = os.environ['OPENAI_API_KEY']
   exam = exam.replace('\\n','')
   sources = str(sources)
   sources = sources.replace('\\n','')
@@ -167,7 +168,7 @@ def check_answers(question, answer, sources):
     model = "gpt-3.5-turbo-16k"
 
     # Set the OpenAI API key for authentication
-    
+    openai.api_key = os.environ['OPENAI_API_KEY']
     # Convert the question to a string and remove any newline characters
     question = str(question)
     question = question.replace('\\n','')
