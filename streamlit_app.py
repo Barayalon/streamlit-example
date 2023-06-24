@@ -206,6 +206,7 @@ def main():
 
 
     user_question = st.text_input("are you ready to start?")
+
     if st.button("Next question"):
        question_num = st.session_state.question_num
        next_question = question_num + 1
@@ -216,6 +217,7 @@ def main():
       handle_answer(user_question,st.session_state.new_exam[question_num])
     else:
       question_num = st.session_state.question_num
+      qustion = st.session_state.new_exam[question_num]
       question = question.replace("\n","<br/>")
       st.write(bot_template.replace(
               "{{MSG}}", question), unsafe_allow_html=True)
