@@ -37,8 +37,6 @@ def handle_answer(answer,question):
     response = check_answers(question,answer,sources)
     st.session_state.chat_history = history.extend([answer,response])
 
-
-
     if history:
       for i, message in enumerate(history):
           message = message.replace("\n","<br/>")
@@ -202,11 +200,16 @@ def main():
   
     if st.session_state.new_exam:
       st.header("Answer the questions on your data :books:")
-      st.write(bot_template.replace(
-                "{{MSG}}", st.session_state.new_exam[1]), unsafe_allow_html=True)
+      
+      
       user_question = st.text_input("are you ready to start?")
       if user_question:
         handle_answer(user_question,st.session_state.new_exam[1])
+      else:
+        question = st.session_state.new_exam[1]
+        question = question.replace("\n","<br/>")
+        st.write(bot_template.replace(
+                "{{MSG}}", question), unsafe_allow_html=True)
 
     with st.sidebar:
         st.subheader("Your documents")
