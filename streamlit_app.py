@@ -186,6 +186,7 @@ def check_answers(question, answer, sources):
 
 
 def main():
+    st.header("Class AI")
     st.session_state.question_num = 0
     if not(os.environ['OPENAI_API_KEY']):
       st.write('## 1. Enter your OpenAI API key')
