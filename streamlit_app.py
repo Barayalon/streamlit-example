@@ -31,9 +31,10 @@ def get_pdf_text(pdf_docs):
 
 
 def handle_answer(answer,question):
+    history = [st.session_state.chat_history]
     sources = st.session_state.article
     response = check_answers(question,answer,sources)
-    st.session_state.chat_history = [question,response]
+    st.session_state.chat_history = [history,question,response]
 
     for i, message in enumerate(st.session_state.chat_history):
         if i % 2 == 0:
@@ -190,7 +191,7 @@ def main():
         st.session_state.article = None
     if st.session_state.new_exam:
       st.header("Answer the questions on your data :books:")
-      user_question = st.text_input(st.session_state.new_exam[1])
+      user_question = st.text_input("are you ready to start?")
       if user_question:
         handle_answer(user_question,st.session_state.new_exam[1])
 
@@ -208,6 +209,8 @@ def main():
                   st.session_state.new_exam = new_exam.strip().split('\n\n')
                   # define the article as part of the environment 
                   st.session_state.article = raw_text
+        if st.session_state.article:
+           st.text_area("Exam questions", value =st.session_state.new_exam)
 
 
 
