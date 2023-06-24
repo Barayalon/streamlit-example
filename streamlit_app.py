@@ -23,7 +23,7 @@ def on_api_key_change():
 def main():
     st.write('## 1. Enter your OpenAI API key')
     st.text_input('OpenAI API key', type='password', key='api_key', on_change=on_api_key_change, label_visibility="collapsed")
-	openai_key = os.getenv['OPENAI_API_KEY']
+    openai_key = os.getenv['OPENAI_API_KEY']
     
     st.header("Chat with multiple PDFs :books:")
     user_question = st.text_input("Ask a question about your documents:")
