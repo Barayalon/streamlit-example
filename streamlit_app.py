@@ -248,7 +248,7 @@ def main():
           st.write(bot_template.replace(
                       "{{MSG}}", question), unsafe_allow_html=True)
           
-
+    #Add an expander for article view
     if st.session_state.article:
        expander = st.expander("Article text")
        expander.write(st.session_state.article)
