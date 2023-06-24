@@ -197,9 +197,10 @@ def main():
         st.session_state.new_exam = None
     if "article" not in st.session_state:
         st.session_state.article = None
-  
+    st.header("Answer the questions on your data :books:")
+    
     if st.session_state.new_exam:
-      st.header("Answer the questions on your data :books:")
+      
       
       
       user_question = st.text_input("are you ready to start?")
