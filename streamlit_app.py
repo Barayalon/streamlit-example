@@ -37,7 +37,7 @@ def handle_answer(answer,question):
     response = check_answers(question,answer,sources)
     st.session_state.chat_history = history.extend([answer,response])
 
-    if st.session_state.chat_history:
+    if history:
 
       for i, message in enumerate(history):
           if i % 2 == 0:
