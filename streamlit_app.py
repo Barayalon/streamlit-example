@@ -200,7 +200,7 @@ def main():
         st.session_state.article = None
     st.header("Answer the questions on your data :books:")
 
-    if st.session_state.question_num > 0:
+    if int(st.session_state.question_num) > 0:
 
       user_question = st.text_input("are you ready to start?")
 
