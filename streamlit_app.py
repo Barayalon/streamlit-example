@@ -204,9 +204,7 @@ def main():
 
     user_question = st.text_input("are you ready to start?")
     question_num = st.session_state.question_num
-    if st.button("Next Question "+str(question_num) ): 
-      next_question = 1 + int(question_num)
-      st.session_state.question_num = next_question 
+    
 
     if user_question:
       question_num = st.session_state.question_num
@@ -236,6 +234,9 @@ def main():
         if st.session_state.article:
            st.text_area("Exam questions", value =st.session_state.new_exam)
            st.text_area("Question number", value = int(st.session_state.question_num))
+        if st.button("Next Question "+str(question_num) ): 
+          next_question = 1 + int(question_num)
+          st.session_state.question_num = next_question 
 
 
 
