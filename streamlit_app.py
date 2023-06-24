@@ -214,17 +214,17 @@ def main():
        next_question = int(question_num) + int(1)
        st.session_state.question_num = int(next_question)
 
-    if st.session_state.article:
+    if st.session_state.question:
       if user_question:
         question_num = st.session_state.question_num
         handle_answer(user_question,st.session_state.question)
 
-    else:
-      question_num = st.session_state.question_num
-      question = st.session_state.question
-      question = question.replace("\n","<br/>")
-      st.write(bot_template.replace(
-              "{{MSG}}", question), unsafe_allow_html=True)
+      else:
+        question_num = st.session_state.question_num
+        question = st.session_state.question
+        question = question.replace("\n","<br/>")
+        st.write(bot_template.replace(
+                "{{MSG}}", question), unsafe_allow_html=True)
 
     with st.sidebar:
         st.subheader("Your documents")
