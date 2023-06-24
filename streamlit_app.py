@@ -228,7 +228,7 @@ def main():
            st.text_area("Question nu st.session_state.questionmber", value =  st.session_state.question)
 
     
-    if st.session_state.question.find('Multiple') > 0:
+    if st.session_state.question.find('Multiple') > -1:
       user_question = st.radio("choose your answer", st.session_state.question.strip().split('\n'))
     else:
       user_question = st.text_input("Write the answer to the question")
