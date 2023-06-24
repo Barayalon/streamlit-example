@@ -49,6 +49,7 @@ def handle_answer(answer,question):
     else:
        st.write(bot_template.replace(
                   "{{MSG}}", question), unsafe_allow_html=True)
+       st.write(st.session_state.chat_history)
 
 def convert_list_to_text(lst):
     text = ' '.join(lst)
