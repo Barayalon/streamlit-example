@@ -31,7 +31,7 @@ def get_pdf_text(pdf_docs):
 
 
 def handle_answer(answer,question):
-    #st.session_state.chat_history = question
+    st.session_state.chat_history = question
     history = [st.session_state.chat_history]
     sources = st.session_state.article
     response = check_answers(question,answer,sources)
@@ -39,7 +39,7 @@ def handle_answer(answer,question):
 
     if history:
       for i, message in enumerate(history):
-          #message = message.replace("\n","<br/>")
+          message = message.replace("\n","<br/>")
           if i % 2 == 0:
               st.write(bot_template.replace(
                   "{{MSG}}", message), unsafe_allow_html=True)
@@ -237,20 +237,21 @@ def main():
            st.session_state.question = st.radio("Exam questions", st.session_state.new_exam, index = 1)
            st.text_area("Question number", value = int(st.session_state.question_num))
 
-    if st.session_state.question:
-      question_num = st.session_state.question_num
-      question = st.session_state.question
-      question = str(question)
-      question = question.replace("\n","<br/>")
-      st.write(bot_template.replace(
-                  "{{MSG}}", question), unsafe_allow_html=True)
-
+    
     user_question = st.text_input("are you ready to start?")
 
     if st.session_state.question:
           if user_question:
             question_num = st.session_state.question_num
             handle_answer(user_question,st.session_state.question)
+
+          else:
+            question_num = st.session_state.question_num
+            question = st.session_state.question
+            question = str(question)
+            question = question.replace("\n","<br/>")
+            st.write(bot_template.replace(
+                        "{{MSG}}", question), unsafe_allow_html=True)
 
 
               
