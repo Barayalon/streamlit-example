@@ -2,7 +2,7 @@ __version__ = "0.0.0.1"
 app_name = "Build my exam"
 
 import streamlit as st
-from dotenv import load_dotenv
+
 import os
 
 st.set_page_config(layout='centered', page_title=f'{app_name} {__version__}')
