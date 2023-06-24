@@ -8,6 +8,7 @@ import openai
 import prompt
 import openai
 import tiktoken
+from htmlTemplates import css, bot_template, user_template
 
 
 st.set_page_config(layout='centered', page_title=f'{app_name} {__version__}')
@@ -29,6 +30,18 @@ def get_pdf_text(pdf_docs):
     return text
 
 
+def handle_answer(answer,question):
+    sources = st.session_state.article
+    response = check_answers(question,answer,sources)
+    st.session_state.chat_history = [question,response]
+
+    for i, message in enumerate(st.session_state.chat_history):
+        if i % 2 == 0:
+            st.write(user_template.replace(
+                "{{MSG}}", message.content), unsafe_allow_html=True)
+        else:
+            st.write(bot_template.replace(
+                "{{MSG}}", message.content), unsafe_allow_html=True)
 
 
 
@@ -38,9 +51,17 @@ def main():
     st.text_input('OpenAI API key', type='password', key='api_key', on_change=on_api_key_change, label_visibility="collapsed")
     st.write(os.environ['OPENAI_API_KEY'])
     
-    
-    st.header("Chat with multiple PDFs :books:")
-    user_question = st.text_input("Ask a question about your documents:")
+    if "conversation" not in st.session_state:
+        st.session_state.conversation = None
+    if "new_exam" not in st.session_state:
+        st.session_state.new_exam = None
+    if "article" not in st.session_state:
+        st.session_state.article = None
+
+    st.header("Answer the questions on your data :books:")
+    user_question = st.text_input(st.session_state.new_exam[1])
+    if user_question:
+       handle_answer(user_question,st.session_state.new_exam[1])
 
     with st.sidebar:
         st.subheader("Your documents")
@@ -53,7 +74,10 @@ def main():
                   # new exam
                   new_exam = answer_query_gpt_16k_bagrut(prompt.example_questions,raw_text)
                   # list questions
-                  questions_list = new_exam.strip().split('\n\n')
+                  st.session_state.new_exam = new_exam.strip().split('\n\n')
+                  # define the article as part of the environment 
+                  st.session_state.article = raw_text
+
 
 
 
