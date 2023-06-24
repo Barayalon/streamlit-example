@@ -231,12 +231,13 @@ def main():
                   st.session_state.article = raw_text
                   # define the question number
                   st.session_state.question_num = int(1)
-        if st.session_state.article:
-           st.text_area("Exam questions", value =st.session_state.new_exam)
-           st.text_area("Question number", value = int(st.session_state.question_num))
         if st.button("Next Question "+str(question_num) ): 
           next_question = 1 + int(question_num)
           st.session_state.question_num = next_question 
+        if st.session_state.article:
+           st.text_area("Exam questions", value =st.session_state.new_exam)
+           st.text_area("Question number", value = int(st.session_state.question_num))
+
 
 
 
