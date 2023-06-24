@@ -209,14 +209,14 @@ def main():
         next_question = 1 + question_num
         st.session_state.question_num = next_question 
 
-        if user_question:
-          question_num = st.session_state.question_num
-          handle_answer(user_question,st.session_state.new_exam[question_num])
-        else:
-          question = st.session_state.new_exam[question_num]
-          question = question.replace("\n","<br/>")
-          st.write(bot_template.replace(
-                  "{{MSG}}", question), unsafe_allow_html=True)
+      if user_question:
+        question_num = st.session_state.question_num
+        handle_answer(user_question,st.session_state.new_exam[question_num])
+      else:
+        question = st.session_state.new_exam[question_num]
+        question = question.replace("\n","<br/>")
+        st.write(bot_template.replace(
+                "{{MSG}}", question), unsafe_allow_html=True)
 
     with st.sidebar:
         st.subheader("Your documents")
