@@ -43,6 +43,9 @@ def handle_answer(answer,question):
           if i % 2 == 0:
               st.write(bot_template.replace(
                   "{{MSG}}", message), unsafe_allow_html=True)
+            if st.button("Next Question "+str(question_num) ): 
+              next_question = 1 + int(question_num)
+              st.session_state.question_num = next_question 
           else:
               st.write(user_template.replace(
                   "{{MSG}}", message), unsafe_allow_html=True)
