@@ -200,7 +200,7 @@ def main():
         st.session_state.article = None
     st.header("Answer the questions on your data :books:")
 
-    if st.session_state.question_num > 0:
+    if st.session_state.article:
 
       user_question = st.text_input("are you ready to start?")
       if st.button("Next Question"):
@@ -234,6 +234,7 @@ def main():
                   st.session_state.question_num = 1
         if st.session_state.article:
            st.text_area("Exam questions", value =st.session_state.new_exam)
+
 
 
 
