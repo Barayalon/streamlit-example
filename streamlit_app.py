@@ -192,6 +192,8 @@ def main():
         st.session_state.article = None
     if st.session_state.new_exam:
       st.header("Answer the questions on your data :books:")
+      st.write(bot_template.replace(
+                "{{MSG}}", st.session_state.new_exam[1]), unsafe_allow_html=True)
       user_question = st.text_input("are you ready to start?")
       if user_question:
         handle_answer(user_question,st.session_state.new_exam[1])
