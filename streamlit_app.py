@@ -38,10 +38,10 @@ def handle_answer(answer,question):
     for i, message in enumerate(st.session_state.chat_history):
         if i % 2 == 0:
             st.write(user_template.replace(
-                "{{MSG}}", message.content), unsafe_allow_html=True)
+                "{{MSG}}", message), unsafe_allow_html=True)
         else:
             st.write(bot_template.replace(
-                "{{MSG}}", message.content), unsafe_allow_html=True)
+                "{{MSG}}", message), unsafe_allow_html=True)
 
 def convert_list_to_text(lst):
     text = ' '.join(lst)
