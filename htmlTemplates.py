@@ -37,7 +37,7 @@ bot_template = '''
 user_template = '''
 <div class="chat-message user">
     <div class="avatar">
-        <img src="https://i.ibb.co/2ZWFFGC/png-transparent-graphy-student-students-class-photography-people-thumbnail.png" style="max-height: 78px; max-width: 78px;">
+        <img src="https://w7.pngwing.com/pngs/41/862/png-transparent-student-higher-education-study-skills-learning-products-people-logo-teacher-thumbnail.png" style="max-height: 78px; max-width: 78px;">
     </div>    
     <div class="message">{{MSG}}</div>
 </div>
