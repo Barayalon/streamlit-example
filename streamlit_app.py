@@ -206,8 +206,8 @@ def main():
 
       if st.button("Next Question"+str(st.session_state.question_num) ):
         question_num = st.session_state.question_num
-        next_question = 1+ question_num
-        st.session_state.question_num = 1+ question_num
+        next_question = 1 + question_num
+        st.session_state.question_num = next_question 
 
         if user_question:
           question_num = st.session_state.question_num
