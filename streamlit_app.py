@@ -228,7 +228,7 @@ def main():
            st.text_area("Question number", value = int(st.session_state.question_num))
 
     
-    if st.session_state.question.find('\n') > 0:
+    if st.session_state.question.find('Multiple choice') > 0:
       user_question = st.radio("choose your answer", st.session_state.question.strip().split('\n'))
     else:
       user_question = st.text_input("Write the answer to the question")
