@@ -165,7 +165,7 @@ def check_answers(question, answer, sources):
     sources = sources.replace('\\n','')
 
     # Define the messages for the chat-based API call
-    messages = [{'role': 'system', 'content': "You are an English teacher. You are checking your student's answers on an assay exam, this is the assay:" + sources +"this is the question:"+question+"The answer is provided by the student. You need to check if the student answered correctly, if not give the correct answer with an explanation. Refer to the student's vocabulary, grammar and spelling if applicable. if the question is multiple choices check if the answer is correct and if not tell the student to try again"},
+    messages = [{'role': 'system', 'content': "אתה מורה לאנגלית. You are checking your student's answers on an assay exam, this is the assay:" + sources +"this is the question:"+question+"The answer is provided by the student. You need to check if the student answered correctly, if not give the correct answer with an explanation. Refer to the student's vocabulary, grammar and spelling if applicable. if the question is multiple choices check if the answer is correct and if not tell the student to try again.התלמיד שלך מדבר עיברת, הוא יבין יותר טוב אם תענה בעיברית"},
                 {'role': 'user', 'content': "I am your student please review my answer:"+answer}]
 
     # Call the OpenAI Chat Completion API to generate a response
@@ -186,7 +186,7 @@ def check_answers(question, answer, sources):
 
 
 def main():
-    st.header("Class AI")
+    st.header("Class AI",)
     st.session_state.question_num = 0
     if not(os.environ['OPENAI_API_KEY']):
       st.write('## 1. Enter your OpenAI API key')
