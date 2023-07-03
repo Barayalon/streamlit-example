@@ -186,35 +186,35 @@ def check_answers(question, answer, sources):
 
 
 def main():
-    st.header("Class AI",)
-    st.session_state.question_num = 0
+  st.header("Class AI",)
+  st.session_state.question_num = 0
     
-	  st.write('## 1. Enter your OpenAI API key')
-	  st.text_input('OpenAI API key', type='password', key='api_key', on_change=on_api_key_change, label_visibility="collapsed")
-	  st.write(os.environ['OPENAI_API_KEY'])
+	st.write('## 1. Enter your OpenAI API key')
+	st.text_input('OpenAI API key', type='password', key='api_key', on_change=on_api_key_change, label_visibility="collapsed")
+	st.write(os.environ['OPENAI_API_KEY'])
     
-    if "conversation" not in st.session_state:
-        st.session_state.conversation = None
-    if "new_exam" not in st.session_state:
-        st.session_state.new_exam = None
-    if "article" not in st.session_state:
-        st.session_state.article = None
-    if "question_num" not in st.session_state:
-       st.session_state.question_num = int(0)
-    if "question" not in st.session_state:
-      st.session_state.question = None
-    if "chat_history" not in st.session_state:
-      st.session_state.chat_history = None
+  if "conversation" not in st.session_state:
+    st.session_state.conversation = None
+  if "new_exam" not in st.session_state:
+    st.session_state.new_exam = None
+  if "article" not in st.session_state:
+    st.session_state.article = None
+  if "question_num" not in st.session_state:
+    st.session_state.question_num = int(0)
+  if "question" not in st.session_state:
+    st.session_state.question = None
+  if "chat_history" not in st.session_state:
+    st.session_state.chat_history = None
 
-    st.header("Answer the questions on your data :books:")
+  st.header("Answer the questions on your data :books:")
    
-    with st.sidebar:
-        st.subheader("Your documents")
-        pdf_docs = st.file_uploader(
-            "Upload your PDFs here and click on 'Process'", accept_multiple_files=True)
-        if st.button("Generate Exam"):
-             with st.spinner("Processing"):
-                  # get pdf text
+  with st.sidebar:
+    st.subheader("Your documents")
+    pdf_docs = st.file_uploader(
+        "Upload your PDFs here and click on 'Process'", accept_multiple_files=True)
+    if st.button("Generate Exam"):
+      with st.spinner("Processing"):
+         # get pdf text
                   raw_text = get_pdf_text(pdf_docs)
                   # new exam
                   new_exam = answer_query_gpt_16k_bagrut(prompt.example_questions,raw_text)
