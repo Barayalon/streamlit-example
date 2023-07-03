@@ -188,7 +188,7 @@ def check_answers(question, answer, sources):
 def main():
     st.header("Class AI",)
     st.session_state.question_num = 0
-    if not(os.environ['OPENAI_API_KEY']):
+    if os.environ['OPENAI_API_KEY'] == '123123':
       st.write('## 1. Enter your OpenAI API key')
       st.text_input('OpenAI API key', type='password', key='api_key', on_change=on_api_key_change, label_visibility="collapsed")
       st.write(os.environ['OPENAI_API_KEY'])
