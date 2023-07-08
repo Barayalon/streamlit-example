@@ -257,6 +257,7 @@ def main():
       topic = st.text_input("What topic would like to write an exam about?")
       if st.button("Generate Exam"):
         with st.spinner("Processing"):
+                    st.session_state.chat_history = []
                     #text on topic
                     raw_text = gpt_4_raw_text(topic)
                     # new exam
