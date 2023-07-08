@@ -186,73 +186,73 @@ def check_answers(question, answer, sources):
 
 
 def main():
-  st.header("Class AI",)
-  st.session_state.question_num = 0
-    
-  st.write('## 1. Enter your OpenAI API key')
-	st.text_input('OpenAI API key', type='password', key='api_key', on_change=on_api_key_change, label_visibility="collapsed")
-	st.write(os.environ['OPENAI_API_KEY'])
-    
-  if "conversation" not in st.session_state:
-    st.session_state.conversation = None
-  if "new_exam" not in st.session_state:
-    st.session_state.new_exam = None
-  if "article" not in st.session_state:
-    st.session_state.article = None
-  if "question_num" not in st.session_state:
-    st.session_state.question_num = int(0)
-  if "question" not in st.session_state:
-    st.session_state.question = None
-  if "chat_history" not in st.session_state:
-    st.session_state.chat_history = None
+    st.header("Class AI",)
+    st.session_state.question_num = 0
+      
+    st.write('## 1. Enter your OpenAI API key')
+    st.text_input('OpenAI API key', type='password', key='api_key', on_change=on_api_key_change, label_visibility="collapsed")
+    st.write(os.environ['OPENAI_API_KEY'])
+      
+    if "conversation" not in st.session_state:
+      st.session_state.conversation = None
+    if "new_exam" not in st.session_state:
+      st.session_state.new_exam = None
+    if "article" not in st.session_state:
+      st.session_state.article = None
+    if "question_num" not in st.session_state:
+      st.session_state.question_num = int(0)
+    if "question" not in st.session_state:
+      st.session_state.question = None
+    if "chat_history" not in st.session_state:
+      st.session_state.chat_history = None
 
-  st.header("Answer the questions on your data :books:")
-   
-  with st.sidebar:
-    st.subheader("Your documents")
-    pdf_docs = st.file_uploader(
-        "Upload your PDFs here and click on 'Process'", accept_multiple_files=True)
-    if st.button("Generate Exam"):
-      with st.spinner("Processing"):
-         # get pdf text
-                  raw_text = get_pdf_text(pdf_docs)
-                  # new exam
-                  new_exam = answer_query_gpt_16k_bagrut(prompt.example_questions,raw_text)
-                  # list questions
-                  st.session_state.new_exam = new_exam.strip().split('\n\n')
-                  # define the article as part of the environment 
-                  st.session_state.article = raw_text
-                  # define the question number
-                  st.session_state.question_num = int(1)
-        if st.session_state.article:
-           st.session_state.question = st.radio("Exam questions", st.session_state.new_exam, index = 1)
-           st.text_area("Question nu st.session_state.questionmber", value =  st.session_state.question)
-
+    st.header("Answer the questions on your data :books:")
     
-    #if st.session_state.question.find('Multiple') > -1:
-      #user_question = st.radio("choose your answer", st.session_state.question.strip().split('\n'))
-    #else:
-      #user_question = st.text_input("Write the answer to the question")
-    
-    user_question = st.text_input("Write the answer to the question")
+    with st.sidebar:
+      st.subheader("Your documents")
+      pdf_docs = st.file_uploader(
+          "Upload your PDFs here and click on 'Process'", accept_multiple_files=True)
+      if st.button("Generate Exam"):
+        with st.spinner("Processing"):
+          # get pdf text
+                    raw_text = get_pdf_text(pdf_docs)
+                    # new exam
+                    new_exam = answer_query_gpt_16k_bagrut(prompt.example_questions,raw_text)
+                    # list questions
+                    st.session_state.new_exam = new_exam.strip().split('\n\n')
+                    # define the article as part of the environment 
+                    st.session_state.article = raw_text
+                    # define the question number
+                    st.session_state.question_num = int(1)
+          if st.session_state.article:
+            st.session_state.question = st.radio("Exam questions", st.session_state.new_exam, index = 1)
+            st.text_area("Question nu st.session_state.questionmber", value =  st.session_state.question)
 
-    if st.session_state.question:
-        if user_question:
-          question_num = st.session_state.question_num
-          handle_answer(user_question,st.session_state.question)
+      
+      #if st.session_state.question.find('Multiple') > -1:
+        #user_question = st.radio("choose your answer", st.session_state.question.strip().split('\n'))
+      #else:
+        #user_question = st.text_input("Write the answer to the question")
+      
+      user_question = st.text_input("Write the answer to the question")
 
-        else:
-          #question_num = st.session_state.question_num
-          question = st.session_state.question
-          uestion = str(question)
-          question = question.replace("\n","<br/>")
-          st.write(bot_template.replace(
-                      "{{MSG}}", question), unsafe_allow_html=True)
-          
-    #Add an expander for article view
-    if st.session_state.article:
-       expander = st.expander("Article text")
-       expander.write(st.session_state.article)
+      if st.session_state.question:
+          if user_question:
+            question_num = st.session_state.question_num
+            handle_answer(user_question,st.session_state.question)
+
+          else:
+            #question_num = st.session_state.question_num
+            question = st.session_state.question
+            uestion = str(question)
+            question = question.replace("\n","<br/>")
+            st.write(bot_template.replace(
+                        "{{MSG}}", question), unsafe_allow_html=True)
+            
+      #Add an expander for article view
+      if st.session_state.article:
+        expander = st.expander("Article text")
+        expander.write(st.session_state.article)
 
 
               
