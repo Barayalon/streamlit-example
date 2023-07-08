@@ -224,7 +224,7 @@ end the worldwide shortage of clean drinking water."""},
     top_p=1,
     frequency_penalty=0,
     presence_penalty=0)
-  return response
+  return response["choices"][0]["message"]["content"]
 
 
 def main():
