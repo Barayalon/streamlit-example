@@ -269,6 +269,7 @@ def main():
                     st.session_state.question_num = int(1)
             
       st.session_state.question = st.radio("Exam questions", st.session_state.new_exam, index = 1)
+      st.write(st.session_state.new_exam)
 
 
       
