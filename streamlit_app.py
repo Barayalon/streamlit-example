@@ -186,7 +186,7 @@ def check_answers(question, answer, sources):
   
 
 def gpt_4_raw_text(topic):
-     model = "gpt-4"
+  model = "gpt-4"
   openai.api_key = os.environ["OPENAI_API_KEY"]
   topic = str(topic)
   topic = topic.replace('\\n','')
