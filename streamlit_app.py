@@ -38,7 +38,7 @@ def handle_answer(answer,question):
     st.session_state.chat_history = history.extend([answer,response])
 
     if history:
-      for i, message in enumerate(history):
+      for i, message in enumerate(st.session_state.chat_history):
           message = message.replace("\n","<br/>")
           if i % 2 == 0:
               st.write(bot_template.replace(
@@ -276,6 +276,7 @@ def main():
         #user_question = st.text_input("Write the answer to the question")
       
 
+    user_question = st.text_input("Write the answer to the question")
 
     if st.session_state.question:
         if user_question:
@@ -290,7 +291,7 @@ def main():
           st.write(bot_template.replace(
                       "{{MSG}}", question), unsafe_allow_html=True)
 
-    user_question = st.text_input("Write the answer to the question")
+
             
       #Add an expander for article view
     if st.session_state.article:
