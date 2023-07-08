@@ -31,7 +31,7 @@ def get_pdf_text(pdf_docs):
 
 
 def handle_answer(answer,question):
-    st.session_state.chat_history = question
+    st.session_state.chat_history.append(question)
     history = [st.session_state.chat_history]
     sources = st.session_state.article
     response = check_answers(question,answer,sources)
