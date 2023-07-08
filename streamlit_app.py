@@ -33,26 +33,25 @@ def get_pdf_text(pdf_docs):
 def handle_answer(answer,questions):
     #st.session_state.chat_history = []
     questions_list = questions.split('\n')
-    for question in questions_list:
-      st.session_state.chat_history = question
-      history = [st.session_state.chat_history]
-      sources = st.session_state.article
-      response = check_answers(question,answer,sources)
-      st.session_state.chat_history = history.extend([answer,response])
-      history.extend([answer,response])
-      if history:
-        for i, message in enumerate(history):
-            message = message.replace("\n","<br/>")
-            if i % 2 == 0:
-                st.write(bot_template.replace(
-                    "{{MSG}}", message), unsafe_allow_html=True)
-            else:
-                st.write(user_template.replace(
-                    "{{MSG}}", message), unsafe_allow_html=True)
-      else:
-        st.write(bot_template.replace(
-                    "{{MSG}}", question), unsafe_allow_html=True)
-        st.write([st.session_state.chat_history,answer,response,history])
+    st.session_state.chat_history = question
+    history = [st.session_state.chat_history]
+    sources = st.session_state.article
+    response = check_answers(question,answer,sources)
+    st.session_state.chat_history = history.extend([answer,response])
+    history.extend([answer,response])
+    if history:
+      for i, message in enumerate(history):
+          message = message.replace("\n","<br/>")
+          if i % 2 == 0:
+              st.write(bot_template.replace(
+                  "{{MSG}}", message), unsafe_allow_html=True)
+          else:
+              st.write(user_template.replace(
+                  "{{MSG}}", message), unsafe_allow_html=True)
+    else:
+      st.write(bot_template.replace(
+                  "{{MSG}}", question), unsafe_allow_html=True)
+      st.write([st.session_state.chat_history,answer,response,history])
 
 def convert_list_to_text(lst):
     text = ' '.join(lst)
@@ -271,7 +270,7 @@ def main():
                     st.session_state.question_num = int(1)
             
       st.session_state.question = st.radio("Exam questions", st.session_state.new_exam, index = 1)
-      st.write(st.session_state.new_exam)
+      st.code(st.session_state.new_exam)
 
 
       
