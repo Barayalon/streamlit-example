@@ -224,7 +224,7 @@ def main():
                     st.session_state.article = raw_text
                     # define the question number
                     st.session_state.question_num = int(1)
-          if st.session_state.article:
+            if st.session_state.article:
               st.session_state.question = st.radio("Exam questions", st.session_state.new_exam, index = 1)
               st.text_area("Question nu st.session_state.questionmber", value =  st.session_state.question)
 
