@@ -224,7 +224,7 @@ end the worldwide shortage of clean drinking water."""},
     top_p=1,
     frequency_penalty=0,
     presence_penalty=0)
-  choices = html_code['choices'][0]
+  choices = response['choices'][0]
   values = choices.values()
   content = values.mapping['message']['content']
   return response
