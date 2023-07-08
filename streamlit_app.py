@@ -275,7 +275,7 @@ def main():
       #else:
         #user_question = st.text_input("Write the answer to the question")
       
-    user_question = st.text_input("Write the answer to the question")
+
 
     if st.session_state.question:
         if user_question:
@@ -289,6 +289,8 @@ def main():
           question = question.replace("\n","<br/>")
           st.write(bot_template.replace(
                       "{{MSG}}", question), unsafe_allow_html=True)
+
+    user_question = st.text_input("Write the answer to the question")
             
       #Add an expander for article view
     if st.session_state.article:
