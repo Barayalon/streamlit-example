@@ -30,7 +30,8 @@ def get_pdf_text(pdf_docs):
     return text
 
 
-def handle_answer(answer,question):
+def handle_answer(question):
+    answer = ss.get('user_question')
     #st.session_state.chat_history = []
     st.session_state.chat_history = question
     history = [st.session_state.chat_history]
@@ -278,7 +279,7 @@ def main():
         #user_question = st.text_input("Write the answer to the question")
       
 
-    user_question = st.text_input("Write the answer to the question",on_change= handle_answer(user_question,st.session_state.question))
+    st.text_input("Write the answer to the question",key = 'user_question', on_change= handle_answer(st.session_state.question))
 
     if st.session_state.question:
        # if user_question:
