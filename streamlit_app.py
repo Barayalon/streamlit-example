@@ -183,6 +183,49 @@ def check_answers(question, answer, sources):
 
     # Return the content of the first message in the response choices
     return response['choices'][0]['message']['content']
+  
+
+def gpt_4_raw_text(topic):
+     model = "gpt-4"
+  openai.api_key = os.environ["OPENAI_API_KEY"]
+  topic = str(topic)
+  topic = topic.replace('\\n','')
+  messages= [{'role' : 'system', 'content': """You are a private english totur and you need to write an assay based on the topic provided by the student, thisis an example assay: WATER FROM AIR
+
+I It is no secret that the climate is changing throughout the world and less rain is falling in many
+places. This is causing a shortage of drinking water worldwide. This situation is made worse by the
+increasing world population. Fortunately, new sources are being developed, including methods that
+actually take water out of the air. It may sound like magic, but it is already being done.
+II The Canadian WaterMill Company has a device that first extracts water from the air and then
+purifies it, so it is safe to drink. WaterMill's director claims their product is environmentally friendly and
+can work in humid, tropical areas, such as rainforests, as well as in dry regions, like deserts. However,
+this technology does not produce large amounts of water at any one time, it is quite expensive and uses
+a lot of electricity. There is a similar device being developed by American scientists that does the same
+as the Canadian device but it doesn't use electricity at all.
+III An Israeli company has also recently developed a device that produces drinking water from air.
+This product comes in three sizes, including a small unit for a home or an office. It works best in humid
+environments although it can produce water in dry regions as well. It needs to be plugged into an
+electricity supply but the company also makes a device that operates on batteries for use in rural areas
+or in emergency situations.
+IV A recent report from the United Nations (UN) says that 20% of the world's population lives in
+underdeveloped areas, where water sources are limited. This lack of clean water severely affects people's
+lives in those regions. It is the major cause of disease, child mortality and starvation. It has also caused
+wars in the past and probably will again in the future unless this problem is solved.
+V While scientists are developing new methods to extract water from the air, there are additional ways
+of obtaining drinking water. Many countries have huge desalination plants, which convert sea water
+to fresh water. Another way of producing drinking water is the purification of sewage and turning it into
+clean water. Astronauts rely on this solution when in outer space. Hopefully, all these methods will help
+end the worldwide shortage of clean drinking water."""},
+        {'role': 'user', 'content': "this is my topic:"+ topic}]
+  response = openai.ChatCompletion.create(
+    model= "gpt-4",
+    messages= messages,
+    temperature=0,
+    top_p=1,
+    frequency_penalty=0,
+    presence_penalty=0)
+  choices =response['choices']
+  return response
 
 
 def main():
@@ -210,12 +253,11 @@ def main():
     
     with st.sidebar:
       st.subheader("Your documents")
-      pdf_docs = st.file_uploader(
-          "Upload your PDFs here and click on 'Process'", accept_multiple_files=True)
+      topic = st.text_input("What topic would like to write an exam about?")
       if st.button("Generate Exam"):
         with st.spinner("Processing"):
-          # get pdf text
-                    raw_text = get_pdf_text(pdf_docs)
+                    #text on topic
+                    raw_text = gpt_4_raw_text(topic)
                     # new exam
                     new_exam = answer_query_gpt_16k_bagrut(prompt.example_questions,raw_text)
                     # list questions
