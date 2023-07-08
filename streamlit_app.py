@@ -36,9 +36,9 @@ def handle_answer(answer,question):
     sources = st.session_state.article
     response = check_answers(question,answer,sources)
     st.session_state.chat_history = history.extend([answer,response])
-
+    history.extend([answer,response])
     if history:
-      for i, message in enumerate(st.session_state.chat_history):
+      for i, message in enumerate(history):
           message = message.replace("\n","<br/>")
           if i % 2 == 0:
               st.write(bot_template.replace(
