@@ -31,7 +31,7 @@ def get_pdf_text(pdf_docs):
 
 
 def handle_answer(answer,questions):
-    st.session_state.chat_history = []
+    #st.session_state.chat_history = []
     questions_list = questions.split('\n')
     for question in questions_list:
       st.session_state.chat_history.append(question)
@@ -41,7 +41,7 @@ def handle_answer(answer,questions):
       st.session_state.chat_history = history.extend([answer,response])
       history.extend([answer,response])
       if history:
-        for i, message in enumerate(st.session_state.chat_history):
+        for i, message in enumerate(history):
             message = message.replace("\n","<br/>")
             if i % 2 == 0:
                 st.write(bot_template.replace(
