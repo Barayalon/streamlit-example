@@ -294,7 +294,9 @@ def main():
       st.write(bot_template.replace(
                 "{{MSG}}", question), unsafe_allow_html=True)
     
-    st.text_input("Write the answer to the question",key = 'user_question', on_change= handle_answer(st.session_state.question))
+      answer = st.text_input("Write the answer to the question",key = 'user_question')
+      if answer:
+        handle_answer(st.session_state.question)
 
 
 
