@@ -34,7 +34,7 @@ def handle_answer(question):
     answer = ss.get('user_question')
     #st.session_state.chat_history = []
     st.session_state.chat_history = question
-    history = [st.session_state.chat_history]
+    history = []
     sources = st.session_state.article
     response = check_answers(question,answer,sources)
     st.session_state.chat_history = history.extend([answer,response])
