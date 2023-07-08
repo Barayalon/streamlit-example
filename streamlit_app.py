@@ -30,9 +30,8 @@ def get_pdf_text(pdf_docs):
     return text
 
 
-def handle_answer(answer,questions):
+def handle_answer(answer,question):
     #st.session_state.chat_history = []
-    questions_list = questions.split('\n')
     st.session_state.chat_history = question
     history = [st.session_state.chat_history]
     sources = st.session_state.article
