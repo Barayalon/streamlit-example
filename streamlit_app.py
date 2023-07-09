@@ -234,7 +234,7 @@ def main():
       
     st.write('## 1. Enter your OpenAI API key')
     st.text_input('OpenAI API key', type='password', key='api_key', on_change=on_api_key_change, label_visibility="collapsed")
-    st.write(os.environ['OPENAI_API_KEY'])
+    #st.write(os.environ['OPENAI_API_KEY'])
       
     if "conversation" not in st.session_state:
       st.session_state.conversation = None
@@ -269,7 +269,7 @@ def main():
                     st.session_state.question_num = int(1)
             
       st.session_state.question = st.radio("Exam questions", st.session_state.new_exam, index = 1)
-      st.code(st.session_state.new_exam)
+      #st.code(st.session_state.new_exam)
 
 
       
